@@ -104,9 +104,9 @@ class HomeSreen extends StatelessWidget {
                   ),
                   _buildMenuCard(
                     context,
-                    icon: Icons.settings,
-                    label: "Pengaturan",
-                    route: '/settings', 
+                    icon: Icons.menu_open,
+                    label: "Cart Screen",
+                    route: '/cart', 
                   ),
                 ],
               ),

@@ -3,6 +3,7 @@ import 'home_screen.dart';
 import 'list_view.dart';
 import 'profile_stack_login.dart';
 import 'login_screen.dart';
+import 'cart_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         '/friends': (context) => FriendsListScreen(),
         '/profile': (context) => ProfileStackScreen(),
         '/login': (context) => LoginFormScreen(),
+        '/cart': (context) => CartScreen(jumlah: 5, nama: "vallen",),
       },
     );
   }
