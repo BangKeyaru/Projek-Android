@@ -1,29 +1,14 @@
 import 'package:flutter/material.dart';
 
-class CartScreen extends StatefulWidget {
-  const CartScreen({super.key, required this.jumlah, required this.nama});
+class CartScreen extends StatelessWidget {
+  const CartScreen({
+    super.key,
+    this.nama = "Kosong", 
+    this.jumlah = 0,          
+  });
 
   final String nama;
   final int jumlah;
-
-  @override
-  State<CartScreen> createState() => _CartScreenState();
-}
-
-class _CartScreenState extends State<CartScreen> {
-  late TextEditingController namacontroller;
-
-  @override
-  void initState() {
-    super.initState();
-    namacontroller = TextEditingController(text: widget.nama); 
-  }
-
-  @override
-  void dispose() {
-    namacontroller.dispose(); 
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,33 +21,27 @@ class _CartScreenState extends State<CartScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              controller: namacontroller,
-              decoration: const InputDecoration(
-                labelText: "Nama Barang",
-                border: OutlineInputBorder(),
+            Text(
+              "Nama Barang: $nama",
+              style: const TextStyle(
+                fontSize: 20,
+                color: Colors.black87,
               ),
             ),
             const SizedBox(height: 16),
             Text(
-              "Jumlah Barang: ${widget.jumlah}",
+              "Jumlah Barang: $jumlah",
               style: const TextStyle(
                 fontSize: 20,
                 color: Colors.black87,
               ),
             ),
             const SizedBox(height: 24),
-            TextButton(
+            ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.pop(context); 
               },
-              child: const Text(
-                "Kembali",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.blue,
-                ),
-              ),
+              child: const Text("Kembali"),
             ),
           ],
         ),

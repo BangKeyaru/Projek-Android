@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class HomeSreen extends StatelessWidget {
-  const HomeSreen({super.key});
+  const HomeSreen({super.key, required this.email, required this.imagePath});
+
+  final String email;
+  final String imagePath;
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +14,14 @@ class HomeSreen extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 106, 135, 237),
         title: const Text("Kelas Ti23 A2"),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/login'); 
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -35,20 +46,15 @@ class HomeSreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 30,
-                      backgroundColor: Colors.blue,
-                      child: Icon(
-                        Icons.person,
-                        size: 30,
-                        color: Colors.white,
-                      ),
+                      backgroundImage: AssetImage(imagePath), 
                     ),
                     const SizedBox(width: 16),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
+                      children: [
+                        const Text(
                           "Nur Rahman",
                           style: TextStyle(
                             fontSize: 18,
@@ -56,8 +62,8 @@ class HomeSreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "Pengguna flutter",
-                          style: TextStyle(
+                          email, 
+                          style: const TextStyle(
                             fontSize: 14,
                             color: Colors.grey,
                           ),
@@ -98,15 +104,15 @@ class HomeSreen extends StatelessWidget {
                   ),
                   _buildMenuCard(
                     context,
-                    icon: Icons.login,
-                    label: "Form Login",
-                    route: '/login',
+                    icon: Icons.menu_open,
+                    label: "Cart Screen",
+                    route: '/cart',
                   ),
                   _buildMenuCard(
                     context,
-                    icon: Icons.menu_open,
-                    label: "Cart Screen",
-                    route: '/cart', 
+                    icon: Icons.add_box,
+                    label: "Input Cart",
+                    route: '/home_cart',
                   ),
                 ],
               ),
