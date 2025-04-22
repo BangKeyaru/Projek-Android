@@ -1,158 +1,53 @@
 import 'package:flutter/material.dart';
+import 'cart_screen.dart';
 
-class HomeSreen extends StatelessWidget {
-  const HomeSreen({super.key, required this.email, required this.imagePath});
+class HomeScreens extends StatefulWidget {
+  const HomeScreens({super.key});
 
-  final String email;
-  final String imagePath;
+  @override
+  State<HomeScreens> createState() => _HomeScreensState();
+}
+
+class _HomeScreensState extends State<HomeScreens> {
+  TextEditingController jmlController = TextEditingController();
+  TextEditingController namaController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 240, 248, 255),
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 106, 135, 237),
-        title: const Text("Kelas Ti23 A2"),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
+      appBar: AppBar(title: Text('Home Screen')),
+      body: Column(
+        children: [
+          TextButton(
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/login'); 
+              Navigator.of(context).pop();
             },
+            child: Text('Kembali'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => CartScreen(
+                        nama: namaController.text,
+                        jumlah: jmlController.text,
+                      ),
+                ),
+              );
+            },
+            child: Text('Cart Screen'),
+          ),
+          TextField(
+            controller: namaController,
+            decoration: InputDecoration(label: Text('Masukan Nama Barang')),
+          ),
+          TextField(
+            controller: jmlController,
+            decoration: InputDecoration(label: Text('Masukan Jumlah Barang')),
           ),
         ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "My Profile",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 16),
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 30,
-                      backgroundImage: AssetImage(imagePath), 
-                    ),
-                    const SizedBox(width: 16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Nur Rahman",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          email, 
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-            const Text(
-              "Menu",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 16),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                children: [
-                  _buildMenuCard(
-                    context,
-                    icon: Icons.group,
-                    label: "Daftar Teman",
-                    route: '/friends',
-                  ),
-                  _buildMenuCard(
-                    context,
-                    icon: Icons.person,
-                    label: "Profil",
-                    route: '/profile',
-                  ),
-                  _buildMenuCard(
-                    context,
-                    icon: Icons.menu_open,
-                    label: "Cart Screen",
-                    route: '/cart',
-                  ),
-                  _buildMenuCard(
-                    context,
-                    icon: Icons.add_box,
-                    label: "Input Cart",
-                    route: '/home_cart',
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildMenuCard(BuildContext context,
-      {required IconData icon, required String label, required String route}) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, route);
-      },
-      child: Card(
-        elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              size: 40,
-              color: Colors.blue,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              label,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
       ),
     );
   }
