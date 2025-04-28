@@ -3,16 +3,21 @@ import 'home_screen.dart';
 
 class ProfileStackLogin extends StatelessWidget {
   final String email;
+  final VoidCallback toggleTheme;
 
-  const ProfileStackLogin({super.key, required this.email});
+  const ProfileStackLogin({super.key, required this.email, required this.toggleTheme});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: Text('Profile'),
-        backgroundColor: Colors.blueAccent,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.brightness_6),
+            onPressed: toggleTheme
+          ),
+        ],
       ),
       body: Center(
         child: Padding(
@@ -51,11 +56,6 @@ class ProfileStackLogin extends StatelessWidget {
                   icon: Icon(Icons.home),
                   label: Text('Home Screen'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueAccent,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
                     textStyle: TextStyle(fontSize: 16),
                   ),
                 ),

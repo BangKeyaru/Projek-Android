@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'profile_stack_login.dart';
 
 class LoginFormScreen extends StatefulWidget {
-  const LoginFormScreen({super.key});
+  final VoidCallback toggleTheme;
+
+  const LoginFormScreen({super.key, required this.toggleTheme});
 
   @override
   State<LoginFormScreen> createState() => _LoginFormScreenState();
@@ -10,71 +13,54 @@ class LoginFormScreen extends StatefulWidget {
 class _LoginFormScreenState extends State<LoginFormScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  bool passwordtertutup = true;
 
-  void _login() {
-    final email = emailController.text;
-    final password = passwordController.text;
-
-    // Validasi email dan password
-    if (email == "nur@gmail.com" && password == "123456") {
-      Navigator.pushReplacementNamed(context, '/home'); 
-    } else {
-
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text("Login Gagal"),
-          content: const Text("Email atau password salah."),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text("OK"),
-            ),
-          ],
-        ),
-      );
-    }
+  void tampilkanPassword() {
+    setState(() {
+      passwordtertutup = !passwordtertutup;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Form Login"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              "Login",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      appBar: AppBar(title: Text('Menu Login')),
+      body: Column(
+        children: [
+          TextField(
+            controller: emailController,
+            decoration: InputDecoration(
+              labelText: "Email",
+              prefixIcon: Icon(Icons.email),
             ),
-            const SizedBox(height: 20),
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(
-                labelText: "Email",
-                border: OutlineInputBorder(),
+          ),
+          TextField(
+            controller: passwordController,
+            obscureText: passwordtertutup,
+            decoration: InputDecoration(
+              labelText: "Password",
+              prefixIcon: Icon(Icons.lock),
+              suffix: TextButton(
+                onPressed: tampilkanPassword,
+                child: passwordtertutup
+                    ? Icon(Icons.visibility)
+                    : Icon(Icons.visibility_off),
               ),
             ),
-            const SizedBox(height: 20),
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: "Password",
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _login,
-              child: const Text("Login"),
-            ),
-          ],
-        ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              String email = emailController.text;
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfileStackLogin(email: email,toggleTheme: widget.toggleTheme,),
+                ),
+              );
+            },
+            child: Text('Login'),
+          ),
+        ],
       ),
     );
   }
