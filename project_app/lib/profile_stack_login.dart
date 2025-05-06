@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:project_app/login_screen.dart';
 import 'home_screen.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:get/get.dart';
 
 class ProfileStackLogin extends StatelessWidget {
   final String email;
@@ -43,23 +46,25 @@ class ProfileStackLogin extends StatelessWidget {
               ),
               const SizedBox(height: 30),
 
-              // Tombol ke Home
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton.icon(
+                child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomeScreens()),
-                    );
+                    Get.off(() => HomeScreens(toggleTheme: toggleTheme,));
                   },
-                  icon: Icon(Icons.home),
-                  label: Text('Home Screen'),
-                  style: ElevatedButton.styleFrom(
-                    textStyle: TextStyle(fontSize: 16),
+                  child: Text('Home screen'),
                   ),
                 ),
-              ),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: (){
+                  final box = GetStorage();
+                  box.remove('email');
+                  Get.off(() => LoginFormScreen(toggleTheme: toggleTheme,));
+                }, 
+                child: Text('Logout')),
+              )
             ],
           ),
         ),

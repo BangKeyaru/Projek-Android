@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'profile_stack_login.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class LoginFormScreen extends StatefulWidget {
   final VoidCallback toggleTheme;
@@ -48,15 +50,27 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
               ),
             ),
           ),
+          SizedBox(height: 100),
           ElevatedButton(
             onPressed: () {
               String email = emailController.text;
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProfileStackLogin(email: email,toggleTheme: widget.toggleTheme,),
-                ),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => ProfileStackLogin(email: email,toggleTheme: widget.toggleTheme,),
+              //   ),
+              // Get.to(
+              //   () => ProfileStackLogin(
+              //     email: email,
+              //     toggleTheme: widget.toggleTheme,
+              //   ),
+              // );
+              final box = GetStorage();
+              box.write('email', TextEditingController().text);
+              Get.off(() => ProfileStackLogin(
+                email: email,
+                toggleTheme: widget.toggleTheme,
+              ));
             },
             child: Text('Login'),
           ),

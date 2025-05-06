@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'login_screen.dart';
+import 'spalshScreen.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
   runApp(MyApp());
 }
 
@@ -23,13 +26,13 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter App',
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       themeMode: _themeMode,
-      home: LoginFormScreen(toggleTheme: toggleTheme),
+      home: Spalshscreen(toggleTheme: toggleTheme),
     );
   }
 }

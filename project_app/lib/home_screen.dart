@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'cart_screen.dart';
 
 class HomeScreens extends StatefulWidget {
-  const HomeScreens({super.key});
+  final VoidCallback toggleTheme;
+  const HomeScreens({super.key, required this.toggleTheme});
 
   @override
   State<HomeScreens> createState() => _HomeScreensState();
