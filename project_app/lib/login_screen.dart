@@ -4,9 +4,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class LoginFormScreen extends StatefulWidget {
-  final VoidCallback toggleTheme;
 
-  const LoginFormScreen({super.key, required this.toggleTheme});
+  const LoginFormScreen({super.key,});
 
   @override
   State<LoginFormScreen> createState() => _LoginFormScreenState();
@@ -54,23 +53,13 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
           ElevatedButton(
             onPressed: () {
               String email = emailController.text;
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => ProfileStackLogin(email: email,toggleTheme: widget.toggleTheme,),
-              //   ),
-              // Get.to(
-              //   () => ProfileStackLogin(
-              //     email: email,
-              //     toggleTheme: widget.toggleTheme,
-              //   ),
-              // );
+              if (email.isEmpty) {
+              }
+              else {
               final box = GetStorage();
-              box.write('email', TextEditingController().text);
-              Get.off(() => ProfileStackLogin(
-                email: email,
-                toggleTheme: widget.toggleTheme,
-              ));
+              box.write('gmail', TextEditingController().text);
+              Get.off(() => ProfileStackLogin(email: email,));
+              }
             },
             child: Text('Login'),
           ),

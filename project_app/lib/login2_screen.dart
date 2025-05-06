@@ -21,7 +21,7 @@ class LoginScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ProfileStackLogin(email: email, toggleTheme: () {}),
+                  builder: (context) => ProfileStackLogin(email: email,),
                 ),
               );
             },

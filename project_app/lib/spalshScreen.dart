@@ -5,9 +5,8 @@ import 'login_screen.dart';
 import 'package:get_storage/get_storage.dart';
 
 class Spalshscreen extends StatefulWidget {
-  final VoidCallback toggleTheme;
 
-  const Spalshscreen({super.key, required this.toggleTheme});
+  const Spalshscreen({super.key, });
 
   @override
   State<Spalshscreen> createState() => _SpalshscreenState();
@@ -17,19 +16,17 @@ class _SpalshscreenState extends State<Spalshscreen> {
 
 @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Future.delayed(Duration(seconds: 3), () {
 
       final box = GetStorage();
-      final statusemail = box.read('email');
+      final statusemail = box.read('gmail');
 
       if (statusemail == null) {
-        Get.off(() => LoginFormScreen(toggleTheme: widget.toggleTheme,));
+        Get.off(() => LoginFormScreen());
       } else {
-        Get.off(() => ProfileStackLogin(email: statusemail, toggleTheme: widget.toggleTheme,));
+        Get.off(() => ProfileStackLogin(email: statusemail));
       }
-      
     });
   }
 
